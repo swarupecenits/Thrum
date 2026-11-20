@@ -1,0 +1,2 @@
+expo.modules.thrumaudio
+drawable media3_notification_small_icon

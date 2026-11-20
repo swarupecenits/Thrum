@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="expo.modules.thrumaudio.analysis.FeatureExtractorTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-11-20T15:41:11.785Z" hostname="CPC-swaru-PTM43" time="2.072">
+  <properties/>
+  <testcase name="kWeightingReproducesTheBs1770Coefficients" classname="expo.modules.thrumaudio.analysis.FeatureExtractorTest" time="0.007"/>
+  <testcase name="chordProgressionsRevealTheirKey" classname="expo.modules.thrumaudio.analysis.FeatureExtractorTest" time="0.636"/>
+  <testcase name="loudnessRangeSeesTheQuietHalf" classname="expo.modules.thrumaudio.analysis.FeatureExtractorTest" time="0.353"/>
+  <testcase name="clickTracksFindTheirTempo" classname="expo.modules.thrumaudio.analysis.FeatureExtractorTest" time="0.647"/>
+  <testcase name="shortSilentAndBrokenInputStayWellBehaved" classname="expo.modules.thrumaudio.analysis.FeatureExtractorTest" time="0.108"/>
+  <testcase name="sineAtMinus20DbfsReadsMinus20Lufs" classname="expo.modules.thrumaudio.analysis.FeatureExtractorTest" time="0.174"/>
+  <testcase name="bassSharesFollowTheSpectrum" classname="expo.modules.thrumaudio.analysis.FeatureExtractorTest" time="0.117"/>
+  <testcase name="inputStopsAtTheWindow" classname="expo.modules.thrumaudio.analysis.FeatureExtractorTest" time="0.02"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,9 @@
+expo.modules.thrumaudio.thrum-audio-pngs-0 C:\Users\swarupchanda\Workspace\thrum\modules\thrum-audio\android\build\generated\res\pngs\debug
+expo.modules.thrumaudio.thrum-audio-updated_navigation_xml-1 C:\Users\swarupchanda\Workspace\thrum\modules\thrum-audio\android\build\generated\updated_navigation_xml\debug
+expo.modules.thrumaudio.thrum-audio-mergeDebugResources-2 C:\Users\swarupchanda\Workspace\thrum\modules\thrum-audio\android\build\intermediates\incremental\debug\mergeDebugResources\merged.dir
+expo.modules.thrumaudio.thrum-audio-mergeDebugResources-3 C:\Users\swarupchanda\Workspace\thrum\modules\thrum-audio\android\build\intermediates\incremental\debug\mergeDebugResources\stripped.dir
+expo.modules.thrumaudio.thrum-audio-debug-4 C:\Users\swarupchanda\Workspace\thrum\modules\thrum-audio\android\build\intermediates\merged_res\debug\mergeDebugResources
+expo.modules.thrumaudio.thrum-audio-debug-5 C:\Users\swarupchanda\Workspace\thrum\modules\thrum-audio\android\build\intermediates\packaged_res\debug\packageDebugResources
+expo.modules.thrumaudio.thrum-audio-debug-6 C:\Users\swarupchanda\Workspace\thrum\modules\thrum-audio\android\src\debug\res
+expo.modules.thrumaudio.thrum-audio-main-7 C:\Users\swarupchanda\Workspace\thrum\modules\thrum-audio\android\src\main\res
+gradleHome-0 C:\Users\swarupchanda\.gradle

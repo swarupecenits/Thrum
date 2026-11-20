@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="expo.modules.thrumaudio.tags.TagParserTest" tests="16" skipped="0" failures="0" errors="0" timestamp="2026-11-20T15:41:14.299Z" hostname="CPC-swaru-PTM43" time="0.277">
+  <properties/>
+  <testcase name="id3v24SyncedLyricsBecomeLrcAndWin" classname="expo.modules.thrumaudio.tags.TagParserTest" time="0.08"/>
+  <testcase name="mp4LyricsFreeformGainAndAlacEntry" classname="expo.modules.thrumaudio.tags.TagParserTest" time="0.017"/>
+  <testcase name="id3v24CompressedFrameWithLengthIndicator" classname="expo.modules.thrumaudio.tags.TagParserTest" time="0.002"/>
+  <testcase name="flacStreamInfoAndVorbisComments" classname="expo.modules.thrumaudio.tags.TagParserTest" time="0.008"/>
+  <testcase name="aiffCommonChunk" classname="expo.modules.thrumaudio.tags.TagParserTest" time="0.008"/>
+  <testcase name="id3v23WholeTagUnsynchronisation" classname="expo.modules.thrumaudio.tags.TagParserTest" time="0.002"/>
+  <testcase name="id3v22ShortFrames" classname="expo.modules.thrumaudio.tags.TagParserTest" time="0.001"/>
+  <testcase name="oggOpusCommentsAcrossPagesWithR128" classname="expo.modules.thrumaudio.tags.TagParserTest" time="0.011"/>
+  <testcase name="syllableTimedSyltJoinsIntoLines" classname="expo.modules.thrumaudio.tags.TagParserTest" time="0.003"/>
+  <testcase name="id3v23PlainLyricsAndReplayGain" classname="expo.modules.thrumaudio.tags.TagParserTest" time="0.002"/>
+  <testcase name="oggVorbisHeaders" classname="expo.modules.thrumaudio.tags.TagParserTest" time="0.002"/>
+  <testcase name="id3v24ToleratesPlainIntegerFrameSizes" classname="expo.modules.thrumaudio.tags.TagParserTest" time="0.002"/>
+  <testcase name="lyricChoiceAndValueParsing" classname="expo.modules.thrumaudio.tags.TagParserTest" time="0.002"/>
+  <testcase name="corruptFilesNeverThrowOrHang" classname="expo.modules.thrumaudio.tags.TagParserTest" time="0.118"/>
+  <testcase name="apeTagBeforeId3v1" classname="expo.modules.thrumaudio.tags.TagParserTest" time="0.006"/>
+  <testcase name="waveExtensibleWithPaddedChunksAndId3" classname="expo.modules.thrumaudio.tags.TagParserTest" time="0.009"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

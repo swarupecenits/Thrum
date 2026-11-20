@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="expo.modules.thrumaudio.dsp.DspTest" tests="12" skipped="0" failures="0" errors="0" timestamp="2026-11-20T15:41:13.869Z" hostname="CPC-swaru-PTM43" time="0.4">
+  <properties/>
+  <testcase name="peakingHitsItsGainAtTheCentre" classname="expo.modules.thrumaudio.dsp.DspTest" time="0.012"/>
+  <testcase name="fftFindsTheToneBin" classname="expo.modules.thrumaudio.dsp.DspTest" time="0.002"/>
+  <testcase name="processorEmitsSixteenBitForFloatAndSkipsSurround" classname="expo.modules.thrumaudio.dsp.DspTest" time="0.015"/>
+  <testcase name="headroomCoversTheBoost" classname="expo.modules.thrumaudio.dsp.DspTest" time="0.001"/>
+  <testcase name="soundParamsRoundTripAndSanitize" classname="expo.modules.thrumaudio.dsp.DspTest" time="0.035"/>
+  <testcase name="neutralChainIsAlignedWithTheInput" classname="expo.modules.thrumaudio.dsp.DspTest" time="0.054"/>
+  <testcase name="chainStaysFiniteWhileEverythingMoves" classname="expo.modules.thrumaudio.dsp.DspTest" time="0.172"/>
+  <testcase name="limiterNeverExceedsTheCeilingAndKeepsTiming" classname="expo.modules.thrumaudio.dsp.DspTest" time="0.021"/>
+  <testcase name="bypassIsBitExactAndLengthPreserving" classname="expo.modules.thrumaudio.dsp.DspTest" time="0.014"/>
+  <testcase name="shelvesAndRumbleShapeTheEnds" classname="expo.modules.thrumaudio.dsp.DspTest" time="0.0"/>
+  <testcase name="spectrumLightsTheBandOfATone" classname="expo.modules.thrumaudio.dsp.DspTest" time="0.066"/>
+  <testcase name="cascadeOutputMatchesTheDesignedResponse" classname="expo.modules.thrumaudio.dsp.DspTest" time="0.003"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

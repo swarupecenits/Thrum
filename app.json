@@ -1,0 +1,63 @@
+{
+  "expo": {
+    "name": "Thrum",
+    "slug": "thrum",
+    "version": "1.0.0",
+    "description": "Offline music, felt. A bass-first music player with a native sound engine.",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "thrum",
+    "userInterfaceStyle": "dark",
+    "backgroundColor": "#09090B",
+    "platforms": ["android", "web"],
+    "android": {
+      "package": "com.swarupchanda.thrum",
+      "adaptiveIcon": {
+        "backgroundColor": "#09090B",
+        "foregroundImage": "./assets/images/android-icon-foreground.png",
+        "monochromeImage": "./assets/images/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false,
+      "blockedPermissions": [
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.READ_MEDIA_IMAGES",
+        "android.permission.READ_MEDIA_VIDEO",
+        "android.permission.RECORD_AUDIO",
+        "android.permission.SYSTEM_ALERT_WINDOW"
+      ]
+    },
+    "web": {
+      "output": "single",
+      "favicon": "./assets/images/favicon.png",
+      "name": "Thrum",
+      "shortName": "Thrum",
+      "themeColor": "#09090B",
+      "backgroundColor": "#09090B"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#09090B",
+          "image": "./assets/images/splash-icon.png",
+          "imageWidth": 120
+        }
+      ],
+      "expo-sqlite",
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "buildArchs": ["armeabi-v7a", "arm64-v8a"],
+            "useLegacyPackaging": true
+          }
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true,
+      "reactCompiler": true
+    }
+  }
+}
