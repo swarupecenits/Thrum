@@ -41,3 +41,12 @@ example
 # generated native folders
 /ios
 /android
+
+# release signing: never commit, back up somewhere safe (see README)
+credentials.json
+/credentials/
+
+# built apps
+/builds/
+*.apk
+*.aab
