@@ -2,7 +2,7 @@
   "expo": {
     "name": "Thrum",
     "slug": "thrum",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "description": "Offline music, felt. A bass-first music player with a native sound engine.",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -12,6 +12,7 @@
     "platforms": ["android", "web"],
     "android": {
       "package": "com.swarupchanda.thrum",
+      "versionCode": 2,
       "adaptiveIcon": {
         "backgroundColor": "#09090B",
         "foregroundImage": "./assets/images/android-icon-foreground.png",

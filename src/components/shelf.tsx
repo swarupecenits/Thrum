@@ -1,5 +1,5 @@
 import { memo, type ReactNode } from 'react';
-import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
+import { Pressable, ScrollView, StyleSheet, useWindowDimensions, View, type TextStyle } from 'react-native';
 
 import { Cover, MosaicCover } from './cover';
 import { NowBars } from './now-bars';
@@ -8,8 +8,19 @@ import type { Library, Track } from '@/lib/types';
 import { useLibrary } from '@/stores/library';
 import { usePlayer } from '@/stores/player';
 import { openSheet } from '@/stores/ui';
-import { space } from '@/theme';
+import { fitType, space } from '@/theme';
 import { haptic } from '@/utils/haptics';
+
+/**
+ * The italic title beside a fan of covers (daylist, vibe), sized to the screen. Every daylist name fits
+ * four lines at full size in a 148 px column (measured; 156 leaves room for Android's line breaker), so a
+ * narrower one (132 on a 360 dp phone) scales the title down to keep those lines, down to 320 dp screens.
+ * `chrome` is the rest of the card's row: page margins, padding, gap and fan.
+ */
+export function useFanTitleFit(chrome: number): TextStyle | null {
+  const { width, fontScale } = useWindowDimensions();
+  return fitType('serifItalic', width - chrome, 156, fontScale, 16);
+}
 
 /** Up to `n` covers from distinct albums, for mosaics. */
 export function coverTiles(lib: Library, trackIds: readonly string[], n = 4): { albumId: string; trackId: string; label: string }[] {

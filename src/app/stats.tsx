@@ -160,7 +160,7 @@ function StatTile({ icon, value, unit, label, testID }: Tile) {
     <View style={[styles.tile, { backgroundColor: c.surface, borderColor: c.line }]} testID={testID}>
       <Icon name={icon} size={20} color={c.ink3} weight="duotone" />
       <View style={styles.tileValue}>
-        <T variant="title" tabular numberOfLines={1}>
+        <T variant="title" numberOfLines={1}>
           {value}
         </T>
         {unit ? (

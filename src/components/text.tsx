@@ -1,7 +1,7 @@
 import { StyleSheet, Text, type TextProps } from 'react-native';
 
 import { useSettings } from '@/stores/settings';
-import { bases, typo, useAccentWhen, type BasePalette, type TypeVariant } from '@/theme';
+import { bases, MAX_FONT_SCALE, typo, useAccentWhen, type BasePalette, type TypeVariant } from '@/theme';
 
 type BaseInk = 'ink' | 'ink2' | 'ink3' | 'ink4' | 'danger' | 'bg';
 export type InkColor = BaseInk | 'accent' | 'onAccent';
@@ -13,7 +13,10 @@ export type TProps = TextProps & {
   /** A palette ink or any colour string. */
   color?: InkColor | (string & {});
   align?: 'left' | 'center' | 'right';
-  /** Fixed-width digits, for times and counters that change while you look at them. */
+  /**
+   * Fixed-width digits, for times and counters that change while you look at them.
+   * Geist variants only: Fraunces has no tabular figures (use `figure` for a big ticking number).
+   */
   tabular?: boolean;
 };
 
@@ -31,7 +34,7 @@ export function T({ variant = 'body', color = 'ink', align, tabular, style, ...r
       : color;
   return (
     <Text
-      maxFontSizeMultiplier={1.35}
+      maxFontSizeMultiplier={MAX_FONT_SCALE}
       {...rest}
       style={[typo[variant], { color: tint }, align ? { textAlign: align } : null, tabular ? styles.tabular : null, style]}
     />

@@ -5,8 +5,6 @@ import { Geist_500Medium } from '@expo-google-fonts/geist/500Medium';
 import { Geist_600SemiBold } from '@expo-google-fonts/geist/600SemiBold';
 import { Geist_700Bold } from '@expo-google-fonts/geist/700Bold';
 import { GeistMono_500Medium } from '@expo-google-fonts/geist-mono/500Medium';
-import { InstrumentSerif_400Regular } from '@expo-google-fonts/instrument-serif/400Regular';
-import { InstrumentSerif_400Regular_Italic } from '@expo-google-fonts/instrument-serif/400Regular_Italic';
 import { useFonts } from 'expo-font';
 import { type ErrorBoundaryProps, Stack, ThemeProvider, useSegments } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
@@ -16,6 +14,10 @@ import { useEffect, useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
+import FrauncesDisplay from '@/assets/fonts/Fraunces-Display.ttf';
+import FrauncesDisplayItalic from '@/assets/fonts/Fraunces-DisplayItalic.ttf';
+import FrauncesMedium from '@/assets/fonts/Fraunces-Medium.ttf';
+import FrauncesSemiBold from '@/assets/fonts/Fraunces-SemiBold.ttf';
 import { startServices } from '@/audio/services';
 import { CrashScreen } from '@/components/crash-screen';
 import { setTabsShown } from '@/components/layout';
@@ -26,7 +28,7 @@ import { openDb } from '@/db/open';
 import { boot } from '@/stores/boot';
 import { reportWriteError } from '@/stores/persist';
 import { useSettings } from '@/stores/settings';
-import { navigationTheme, useTheme } from '@/theme';
+import { fonts, navigationTheme, useTheme } from '@/theme';
 import { seedWebDemo } from '@/utils/web-demo';
 
 void SplashScreen.preventAutoHideAsync().catch(() => {});
@@ -54,8 +56,10 @@ export default function RootLayout() {
     Geist_600SemiBold,
     Geist_700Bold,
     GeistMono_500Medium,
-    InstrumentSerif_400Regular,
-    InstrumentSerif_400Regular_Italic,
+    [fonts.serif]: FrauncesDisplay,
+    [fonts.serifItalic]: FrauncesDisplayItalic,
+    [fonts.serifMedium]: FrauncesMedium,
+    [fonts.serifSemi]: FrauncesSemiBold,
   });
   const [phase, setPhase] = useState<Phase>({ kind: 'loading' });
   const [attempt, setAttempt] = useState(0);

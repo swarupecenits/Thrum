@@ -90,7 +90,7 @@ export function SleepSheet() {
             accessibilityLabel={`${m} minutes`}
             testID={`sleep-${m}`}
             style={[styles.tile, { backgroundColor: c.fill, borderColor: c.line }]}>
-            <T variant="title" tabular>
+            <T variant="title">
               {m}
             </T>
             <T variant="label" color="ink3">

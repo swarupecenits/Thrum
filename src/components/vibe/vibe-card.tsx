@@ -7,20 +7,23 @@ import { Cover } from '../cover';
 import { Icon } from '../icon';
 import { go, vibeHref } from '../nav';
 import { Press, surfaceRole } from '../press';
-import { coverTiles } from '../shelf';
+import { coverTiles, useFanTitleFit } from '../shelf';
 import { T } from '../text';
 import { vibeColors, vibeIcon } from '@/hooks/use-mix';
 import { mix } from '@/lib/color';
 import { formatCount } from '@/lib/format';
 import { primaryArtist } from '@/lib/library';
 import type { Library, VibeQuery } from '@/lib/types';
-import { describeVibe } from '@/lib/vibe';
+import { describeVibe, vibeTitle } from '@/lib/vibe';
 import { createPlaylist, MAX_PLAYLIST_NAME } from '@/stores/collections';
 import { player, usePlayer, type PlaySource } from '@/stores/player';
 import { toast } from '@/stores/toast';
 import { radius, space } from '@/theme';
 
 const ART = 92;
+const FAN_W = ART + 36;
+/** The card's row besides the title: page margins, card padding, the gap and the fan. */
+const CHROME = 2 * space.page + 2 * space.lg + space.xxl + FAN_W;
 const FAN = [
   { rotate: '-9deg', x: -38, y: 10, z: 1 },
   { rotate: '7deg', x: 30, y: 4, z: 2 },
@@ -58,6 +61,7 @@ export function VibeCard({ query, vibe, ids, lib, onPlay }: VibeCardProps) {
   const playing = usePlayer((s) => s.playWhenReady && s.source?.kind === 'vibe' && s.source.id === query);
   const [saved, setSaved] = useState<{ query: string; playlistId: string } | null>(null);
   const savedId = saved?.query === query ? saved.playlistId : null;
+  const fit = useFanTitleFit(CHROME);
 
   const title = describeVibe(vibe);
   const [c1, c2] = vibeColors(vibe);
@@ -112,8 +116,8 @@ export function VibeCard({ query, vibe, ids, lib, onPlay }: VibeCardProps) {
           </T>
         </View>
         <View style={styles.body}>
-          <T variant="serif" color="#FFFFFF" numberOfLines={3} style={styles.title}>
-            {title}
+          <T variant="serifItalic" color="#FFFFFF" numberOfLines={4} style={[styles.title, fit]}>
+            {vibeTitle(vibe)}
           </T>
           <View style={styles.fan} pointerEvents="none">
             {tiles.map((t, i) => {
@@ -171,9 +175,10 @@ const styles = StyleSheet.create({
     borderColor: 'rgba(255,255,255,0.08)',
   },
   kicker: { flexDirection: 'row', alignItems: 'center', gap: space.xs },
-  body: { flexDirection: 'row', alignItems: 'center', flex: 1, gap: space.md },
+  // The back cover's corner reaches ~26 px left of the fan; the wide gap keeps the title out from under it.
+  body: { flexDirection: 'row', alignItems: 'center', flex: 1, gap: space.xxl },
   title: { flex: 1 },
-  fan: { width: ART + 36, height: ART + 20, alignItems: 'center', justifyContent: 'center' },
+  fan: { width: FAN_W, height: ART + 20, alignItems: 'center', justifyContent: 'center' },
   tile: { position: 'absolute', boxShadow: '0 10px 24px rgba(0,0,0,0.45)' },
   footer: { flexDirection: 'row', alignItems: 'center', gap: space.xs },
   subtitle: { flex: 1, marginRight: space.xs },

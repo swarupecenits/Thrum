@@ -7,8 +7,13 @@ import androidx.annotation.OptIn
 import androidx.media3.common.MediaItem
 import androidx.media3.common.MediaMetadata
 import androidx.media3.common.util.UnstableApi
+import androidx.media3.session.LibraryResult
+import androidx.media3.session.MediaLibraryService
+import androidx.media3.session.MediaLibraryService.LibraryParams
+import androidx.media3.session.MediaLibraryService.MediaLibrarySession
 import androidx.media3.session.MediaSession
-import androidx.media3.session.MediaSessionService
+import androidx.media3.session.SessionError
+import com.google.common.collect.ImmutableList
 import com.google.common.util.concurrent.Futures
 import com.google.common.util.concurrent.ListenableFuture
 import com.google.common.util.concurrent.SettableFuture
@@ -20,10 +25,13 @@ import java.util.concurrent.Executors
 /**
  * Hosts the MediaSession around [PlayerHub]'s player: media notification, lock screen, Now Bar,
  * Bluetooth/headset buttons and System UI playback resumption after a reboot.
+ *
+ * It's a library service only because System UI fetches the resumption card through the library
+ * "recent" root, which Media3 serves for library sessions alone. The browsable tree stays empty.
  */
 @OptIn(UnstableApi::class)
-class PlaybackService : MediaSessionService() {
-  private var session: MediaSession? = null
+class PlaybackService : MediaLibraryService() {
+  private var session: MediaLibrarySession? = null
   private val background: ExecutorService = Executors.newSingleThreadExecutor { r ->
     Thread(r, "thrum-resume").apply { isDaemon = true }
   }
@@ -32,15 +40,14 @@ class PlaybackService : MediaSessionService() {
     super.onCreate()
     SoundCenter.init(this)
     setShowNotificationForIdlePlayer(SHOW_NOTIFICATION_FOR_IDLE_PLAYER_NEVER)
-    val builder = MediaSession.Builder(this, PlayerHub.player(this))
+    val builder = MediaLibrarySession.Builder(this, PlayerHub.player(this), callback)
       .setId("thrum")
-      .setCallback(callback)
       .setBitmapLoader(ThrumBitmapLoader(this))
     sessionActivity()?.let { builder.setSessionActivity(it) }
     session = builder.build()
   }
 
-  override fun onGetSession(controllerInfo: MediaSession.ControllerInfo): MediaSession? = session
+  override fun onGetSession(controllerInfo: MediaSession.ControllerInfo): MediaLibrarySession? = session
 
   override fun onTaskRemoved(rootIntent: Intent?) {
     PlayerHub.persistNow()
@@ -68,7 +75,37 @@ class PlaybackService : MediaSessionService() {
     return PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
   }
 
-  private val callback = object : MediaSession.Callback {
+  private val callback = object : MediaLibrarySession.Callback {
+    // Without a root, legacy browsers (which only connect to reach the session) would be refused.
+    override fun onGetLibraryRoot(
+      session: MediaLibrarySession,
+      browser: MediaSession.ControllerInfo,
+      params: LibraryParams?,
+    ): ListenableFuture<LibraryResult<MediaItem>> = Futures.immediateFuture(LibraryResult.ofItem(ROOT, params))
+
+    override fun onGetItem(
+      session: MediaLibrarySession,
+      browser: MediaSession.ControllerInfo,
+      mediaId: String,
+    ): ListenableFuture<LibraryResult<MediaItem>> = Futures.immediateFuture(
+      if (mediaId == ROOT_ID) LibraryResult.ofItem(ROOT, null) else LibraryResult.ofError(SessionError.ERROR_BAD_VALUE),
+    )
+
+    override fun onGetChildren(
+      session: MediaLibrarySession,
+      browser: MediaSession.ControllerInfo,
+      parentId: String,
+      page: Int,
+      pageSize: Int,
+      params: LibraryParams?,
+    ): ListenableFuture<LibraryResult<ImmutableList<MediaItem>>> = Futures.immediateFuture(
+      if (parentId == ROOT_ID) {
+        LibraryResult.ofItemList(ImmutableList.of(), params)
+      } else {
+        LibraryResult.ofError(SessionError.ERROR_BAD_VALUE)
+      },
+    )
+
     /**
      * External controllers (Assistant, Wear, car) only get to queue MediaStore audio by id. Any URI
      * they pass is ignored, so another app can never make Thrum open a file on its behalf.
@@ -137,5 +174,20 @@ class PlaybackService : MediaSessionService() {
       }
       return future
     }
+  }
+
+  private companion object {
+    const val ROOT_ID = "thrum.root"
+    val ROOT: MediaItem = MediaItem.Builder()
+      .setMediaId(ROOT_ID)
+      .setMediaMetadata(
+        MediaMetadata.Builder()
+          .setTitle("Thrum")
+          .setIsBrowsable(true)
+          .setIsPlayable(false)
+          .setMediaType(MediaMetadata.MEDIA_TYPE_FOLDER_MIXED)
+          .build(),
+      )
+      .build()
   }
 }

@@ -1,4 +1,4 @@
-import { describeVibe, estimatePoint, parseVibe, rankByPoint, rankByVibe, VIBE_EXAMPLES, withoutChip } from '../vibe';
+import { describeVibe, estimatePoint, parseVibe, rankByPoint, rankByVibe, VIBE_EXAMPLES, vibeTitle, withoutChip } from '../vibe';
 import { DAY_MS } from '../time';
 import type { Features, PlayEvent, VibeQuery } from '../types';
 import { ctxOf, feat, libOf, local, play, sample } from './fixtures';
@@ -111,6 +111,15 @@ describe('parseVibe', () => {
       expect({ s, text: q.text }).toEqual({ s, text: '' });
       expect(q.chips.length).toBeGreaterThan(0);
     }
+  });
+});
+
+describe('vibeTitle', () => {
+  it('wraps between parts: short named parts stay whole and each dot stays with the part before it', () => {
+    const nb = (s: string) => s.replace(/_/g, '\u00a0');
+    const q = parse('chill late night recently added under 4 minutes prateek kuhad');
+    expect(describeVibe(q)).toBe('Chill · Late night · Recently added · Under 4 min · “prateek kuhad”');
+    expect(vibeTitle(q)).toBe(nb('Chill_· Late_night_· Recently added_· Under_4_min_· “prateek kuhad”'));
   });
 });
 

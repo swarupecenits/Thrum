@@ -1,0 +1,67 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="expo.modules.thrumaudio" >
+4
+5    <uses-sdk android:minSdkVersion="24" />
+5-->INJECTED
+5-->INJECTED
+6
+7    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
+7-->C:\Users\swarupchanda\Workspace\thrum\modules\thrum-audio\android\src\main\AndroidManifest.xml:2:3-73
+7-->C:\Users\swarupchanda\Workspace\thrum\modules\thrum-audio\android\src\main\AndroidManifest.xml:2:20-70
+8    <uses-permission
+8-->C:\Users\swarupchanda\Workspace\thrum\modules\thrum-audio\android\src\main\AndroidManifest.xml:3:3-105
+9        android:name="android.permission.READ_EXTERNAL_STORAGE"
+9-->C:\Users\swarupchanda\Workspace\thrum\modules\thrum-audio\android\src\main\AndroidManifest.xml:3:20-75
+10        android:maxSdkVersion="32" />
+10-->C:\Users\swarupchanda\Workspace\thrum\modules\thrum-audio\android\src\main\AndroidManifest.xml:3:76-102
+11    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+11-->C:\Users\swarupchanda\Workspace\thrum\modules\thrum-audio\android\src\main\AndroidManifest.xml:4:3-75
+11-->C:\Users\swarupchanda\Workspace\thrum\modules\thrum-audio\android\src\main\AndroidManifest.xml:4:20-72
+12    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
+12-->C:\Users\swarupchanda\Workspace\thrum\modules\thrum-audio\android\src\main\AndroidManifest.xml:5:3-90
+12-->C:\Users\swarupchanda\Workspace\thrum\modules\thrum-audio\android\src\main\AndroidManifest.xml:5:20-87
+13    <uses-permission android:name="android.permission.WAKE_LOCK" />
+13-->C:\Users\swarupchanda\Workspace\thrum\modules\thrum-audio\android\src\main\AndroidManifest.xml:6:3-66
+13-->C:\Users\swarupchanda\Workspace\thrum\modules\thrum-audio\android\src\main\AndroidManifest.xml:6:20-63
+14
+15    <application>
+15-->C:\Users\swarupchanda\Workspace\thrum\modules\thrum-audio\android\src\main\AndroidManifest.xml:8:3-27:17
+16        <service
+16-->C:\Users\swarupchanda\Workspace\thrum\modules\thrum-audio\android\src\main\AndroidManifest.xml:9:5-18:15
+17            android:name="expo.modules.thrumaudio.playback.PlaybackService"
+17-->C:\Users\swarupchanda\Workspace\thrum\modules\thrum-audio\android\src\main\AndroidManifest.xml:10:7-47
+18            android:exported="true"
+18-->C:\Users\swarupchanda\Workspace\thrum\modules\thrum-audio\android\src\main\AndroidManifest.xml:11:7-30
+19            android:foregroundServiceType="mediaPlayback" >
+19-->C:\Users\swarupchanda\Workspace\thrum\modules\thrum-audio\android\src\main\AndroidManifest.xml:12:7-52
+20            <intent-filter>
+20-->C:\Users\swarupchanda\Workspace\thrum\modules\thrum-audio\android\src\main\AndroidManifest.xml:13:7-17:23
+21                <action android:name="androidx.media3.session.MediaLibraryService" />
+21-->C:\Users\swarupchanda\Workspace\thrum\modules\thrum-audio\android\src\main\AndroidManifest.xml:14:9-78
+21-->C:\Users\swarupchanda\Workspace\thrum\modules\thrum-audio\android\src\main\AndroidManifest.xml:14:17-75
+22                <action android:name="androidx.media3.session.MediaSessionService" />
+22-->C:\Users\swarupchanda\Workspace\thrum\modules\thrum-audio\android\src\main\AndroidManifest.xml:15:9-78
+22-->C:\Users\swarupchanda\Workspace\thrum\modules\thrum-audio\android\src\main\AndroidManifest.xml:15:17-75
+23                <action android:name="android.media.browse.MediaBrowserService" />
+23-->C:\Users\swarupchanda\Workspace\thrum\modules\thrum-audio\android\src\main\AndroidManifest.xml:16:9-75
+23-->C:\Users\swarupchanda\Workspace\thrum\modules\thrum-audio\android\src\main\AndroidManifest.xml:16:17-72
+24            </intent-filter>
+25        </service>
+26
+27        <receiver
+27-->C:\Users\swarupchanda\Workspace\thrum\modules\thrum-audio\android\src\main\AndroidManifest.xml:20:5-26:16
+28            android:name="androidx.media3.session.MediaButtonReceiver"
+28-->C:\Users\swarupchanda\Workspace\thrum\modules\thrum-audio\android\src\main\AndroidManifest.xml:21:7-65
+29            android:exported="true" >
+29-->C:\Users\swarupchanda\Workspace\thrum\modules\thrum-audio\android\src\main\AndroidManifest.xml:22:7-30
+30            <intent-filter>
+30-->C:\Users\swarupchanda\Workspace\thrum\modules\thrum-audio\android\src\main\AndroidManifest.xml:23:7-25:23
+31                <action android:name="android.intent.action.MEDIA_BUTTON" />
+31-->C:\Users\swarupchanda\Workspace\thrum\modules\thrum-audio\android\src\main\AndroidManifest.xml:24:9-69
+31-->C:\Users\swarupchanda\Workspace\thrum\modules\thrum-audio\android\src\main\AndroidManifest.xml:24:17-66
+32            </intent-filter>
+33        </receiver>
+34    </application>
+35
+36</manifest>

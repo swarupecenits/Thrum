@@ -5,7 +5,7 @@ import { useNow } from '@/stores/now';
 import { useSettings } from '@/stores/settings';
 
 export { ACCENTS, bases, LIME, type AccentId, type AccentSwatch, type Palette, type ThemeId } from './palette';
-export { EASE_OUT, fonts, radius, space, springs, typo, type TypeVariant } from './type';
+export { EASE_OUT, fitType, fonts, MAX_FONT_SCALE, radius, space, springs, typo, type TypeVariant } from './type';
 
 export type BasePalette = Omit<Palette, 'accent' | 'onAccent'>;
 

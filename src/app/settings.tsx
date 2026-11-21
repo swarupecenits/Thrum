@@ -520,7 +520,7 @@ function AnalysisCard() {
         accessibilityValue={{ min: 0, max: Math.max(1, total), now: done + bad }}
         style={styles.progress}>
         <View style={styles.progressTop}>
-          <T variant="title" tabular testID="settings-analysed">
+          <T variant="figure" testID="settings-analysed">
             {formatNumber(done)}
           </T>
           <T variant="callout" color="ink3">

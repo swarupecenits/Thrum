@@ -7,7 +7,7 @@ import { Cover } from '../cover';
 import { Icon } from '../icon';
 import { go } from '../nav';
 import { Press, surfaceRole } from '../press';
-import { coverTiles } from '../shelf';
+import { coverTiles, useFanTitleFit } from '../shelf';
 import { T } from '../text';
 import { mix } from '@/lib/color';
 import { moodById } from '@/lib/moods';
@@ -16,6 +16,9 @@ import { player, usePlayer } from '@/stores/player';
 import { radius, space } from '@/theme';
 
 const ART = 92;
+const FAN_W = ART + 36;
+/** The card's row besides the title: page margins, card padding, the gap and the fan. */
+const CHROME = 2 * space.page + 2 * space.lg + space.xxl + FAN_W;
 const FAN = [
   { rotate: '-9deg', x: -38, y: 10, z: 1 },
   { rotate: '7deg', x: 30, y: 4, z: 2 },
@@ -28,6 +31,7 @@ type DaylistCardProps = { daylist: Daylist; lib: Library };
 function DaylistCardBase({ daylist, lib }: DaylistCardProps) {
   const fromDaylist = usePlayer((s) => s.source?.kind === 'daylist');
   const playing = usePlayer((s) => s.playWhenReady && s.source?.kind === 'daylist');
+  const fit = useFanTitleFit(CHROME);
   if (!daylist.trackIds.length) return null;
 
   const m1 = moodById(daylist.moods[0] ?? 'chill');
@@ -57,7 +61,7 @@ function DaylistCardBase({ daylist, lib }: DaylistCardProps) {
           </T>
         </View>
         <View style={styles.body}>
-          <T variant="serif" color="#FFFFFF" numberOfLines={3} style={styles.title}>
+          <T variant="serifItalic" color="#FFFFFF" numberOfLines={4} style={[styles.title, fit]}>
             {daylist.title}
           </T>
           <View style={styles.fan} pointerEvents="none">
@@ -113,9 +117,10 @@ const styles = StyleSheet.create({
     borderColor: 'rgba(255,255,255,0.08)',
   },
   kicker: { flexDirection: 'row', alignItems: 'center', gap: space.xs },
-  body: { flexDirection: 'row', alignItems: 'center', flex: 1, gap: space.md },
+  // The back cover's corner reaches ~26 px left of the fan; the wide gap keeps the title out from under it.
+  body: { flexDirection: 'row', alignItems: 'center', flex: 1, gap: space.xxl },
   title: { flex: 1 },
-  fan: { width: ART + 36, height: ART + 20, alignItems: 'center', justifyContent: 'center' },
+  fan: { width: FAN_W, height: ART + 20, alignItems: 'center', justifyContent: 'center' },
   tile: { position: 'absolute', boxShadow: '0 10px 24px rgba(0,0,0,0.45)' },
   footer: { flexDirection: 'row', alignItems: 'center', gap: space.md },
   subtitle: { flex: 1 },

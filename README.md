@@ -123,27 +123,59 @@ src/lib              Pure logic with Jest tests: vibe parser, moods, search, EQ,
 src/stores           zustand state: player, library, sound, history, settings
 src/audio, src/db    Native bridge helpers and SQLite persistence
 modules/thrum-audio  Kotlin Expo module: Media3 service, DSP, MediaStore scanner, analysis, tags/lyrics, web shim
+plugins              Config plugin that signs release builds with the key in credentials.json
+assets/fonts         Fraunces display type: static cuts of the variable font (SIL OFL, licence included)
 ```
 
-## Make an installable APK (later)
+## Install the APK
 
-With EAS (cloud builds, already logged in as `swarupcsenits`):
+A signed release build is at `builds\Thrum-1.1.0.apk`. It has the JavaScript bundled in, so it runs on its
+own without a dev server, on any 64-bit or 32-bit ARM phone running Android 7.0 or newer. It installs over
+1.0.0 as an update (same signing key), so your playlists, stats and sound settings stay.
+
+1. Copy the APK to your phone (Quick Share, USB or Google Drive) and open it.
+2. Allow **Install unknown apps** for the app you opened it from, then tap **Install**.
+3. If you installed the dev build (`npm run android`) earlier, uninstall it first. It's signed with the
+   debug key, so Android refuses to replace it ("package conflicts with an existing package").
+   Uninstalling also clears Thrum's data (playlists, stats, sound settings).
+
+With USB debugging on, `adb install -r builds\Thrum-1.1.0.apk` does the same.
+
+### Signing key
+
+Release builds are signed with a private key that lives only on this machine:
+
+- `credentials\android\thrum-release.jks`: the keystore
+- `credentials.json`: its passwords, in the format EAS reads
+
+Both are gitignored. **Back them up somewhere safe** (a password manager or private cloud folder).
+Android only installs an update when it's signed with the same key. Without these files, a new version
+won't install over this one unless you uninstall first and lose the app's data.
+
+`plugins/with-release-signing.js` adds this key to `android/app/build.gradle` on every prebuild. If
+`credentials.json` is missing, release builds fall back to the debug key.
+
+### Build a new version
+
+Bump `version` in `app.json` and raise `versionCode` under `android` (1.1.0 is 2; it must go up with
+every release), then:
 
 ```powershell
-eas init                                       # once: links the project to your Expo account
-eas build -p android --profile preview         # installable APK for your phone
-eas build -p android --profile production      # Play Store bundle (AAB)
-```
-
-Or build one locally without EAS:
-
-```powershell
+npx expo prebuild --platform android           # applies app.json and plugin changes
 cd android
 .\gradlew.bat :app:assembleRelease             # android\app\build\outputs\apk\release\app-release.apk
 ```
 
-The local release APK is signed with the debug key. That's fine for your own phone, but the Play Store
-needs a real keystore (EAS manages one for you).
+Or build in the cloud with EAS (already logged in as `swarupcsenits`):
+
+```powershell
+eas init                                       # once: links the project to your Expo account
+eas build -p android --profile preview         # installable APK
+eas build -p android --profile production      # Play Store bundle (AAB)
+```
+
+Every EAS profile uses `"credentialsSource": "local"`, so EAS signs with the same key and its APKs install
+as updates over the local ones.
 
 ## Troubleshooting
 

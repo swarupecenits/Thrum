@@ -1,0 +1,1 @@
+int drawable media3_notification_small_icon 0x0

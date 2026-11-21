@@ -663,9 +663,22 @@ export function rankByPoint(ctx: VibeContext, energy: number, valence: number, l
     .map((r) => ({ id: r.t.id, score: Math.max(0, r.score) }));
 }
 
+const chipText = (c: VibeChip): string => (c.kind === 'text' ? `\u201c${c.label}\u201d` : c.label);
+
 /** "Chill · Late night · Bass-heavy", with leftover words quoted: "Chill · “prateek kuhad”". */
 export function describeVibe(q: VibeQuery): string {
-  return q.chips.map((c) => (c.kind === 'text' ? `\u201c${c.label}\u201d` : c.label)).join(' \u00b7 ');
+  return q.chips.map(chipText).join(' \u00b7 ');
+}
+
+/**
+ * `describeVibe` set to wrap between its parts: no-break spaces hold each dot to the part before it and keep
+ * short named parts whole ("Late night"; 11 characters at most, which fit a line of the vibe card). Typed
+ * words and track titles still wrap anywhere.
+ */
+export function vibeTitle(q: VibeQuery): string {
+  return q.chips
+    .map((c) => (c.kind === 'text' || c.kind === 'similar' || c.label.length > 11 ? chipText(c) : c.label.replace(/ /g, '\u00a0')))
+    .join('\u00a0\u00b7 ');
 }
 
 /** Prompts the Vibe tab suggests. Each one must parse completely, with no leftover text (see tests). */
